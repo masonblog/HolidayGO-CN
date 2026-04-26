@@ -2,15 +2,13 @@
 
 > 中国大陆各省假期政策一站式查询工具
 
-**本工具** 帮助你在几十秒内查清自己所在省份的七类法定假期权益：年休假、婚假、产假、陪产/护理假、育儿假、探亲假、病假。
-
-国家层面的统一规定与各省（自治区、直辖市）的特殊规定自动合并展示，让你不用翻遍法规文件，也能快速获得准确、可溯源的假期信息。
+**本工具** 帮助你在几十秒内查清自己所在省份的七类法定假期权益：年休假、婚假、产假、陪产/护理假、育儿假、探亲假、病假。国家层面的统一规定与各省（自治区、直辖市）的特殊规定自动合并展示，让你不用翻遍法规文件，也能快速获得准确、可溯源的假期信息。
 
 ---
 
 ## 在线使用
 
-**GitHub Pages**: [https://masonblog.github.io/HolidayGO-CN](https://masonblog.github.io/HolidayGO-CN)
+**直接访问**: [https://masonblog.github.io/HolidayGO-CN](https://masonblog.github.io/HolidayGO-CN)
 
 > 每次推送到 `master` 分支后，GitHub Actions 会自动构建并部署，约 1-2 分钟后生效。
 
@@ -87,22 +85,6 @@ npm run lint        # ESLint 检查
 npm run typecheck   # TypeScript 类型检查
 npm run validate-data   # 校验假期数据格式
 ```
-
----
-
-## 部署方式
-
-本项目为纯静态站点（Next.js `output: 'export'`），通过 **GitHub Actions** 自动部署到 **GitHub Pages**。
-
-### 配置步骤
-
-1. 进入仓库 **Settings → Pages**
-2. **Build and deployment → Source** 选择 **GitHub Actions**
-3. 每次推送到 `master` 分支时，Actions 会自动构建并部署
-
-### 部署到其他平台
-
-构建产物输出到 `out/` 目录，可直接上传到任何静态托管平台（Vercel、Cloudflare Pages、Netlify、腾讯云 COS 等）。注意：若部署到根域名，请移除 `next.config.mjs` 中的 `basePath` 和 `assetPrefix` 配置。
 
 ---
 
