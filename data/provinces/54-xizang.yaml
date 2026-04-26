@@ -1,0 +1,65 @@
+code: "54"
+name: 西藏自治区
+# 来源：西藏自治区人口与计划生育条例及自治区机关、企事业单位职工产假相关规定。
+# 西藏在产假与陪产假上有较大延长，是大陆地区时长最长之一；个别条款仅适用于机关事业单位。
+leaveTypes:
+  marriage:
+    rule: 西藏自治区婚假为 3 天，与中央一致。
+    daysTable:
+      - condition: 依法办理结婚登记
+        days: 3
+        paid: full
+    citations:
+      - title: 西藏自治区人口与计划生育条例
+        url: https://www.xizang.gov.cn/xwzx_406/bmkx/202302/t20230227_343388.html
+        source: local-gov
+    lastVerified: "2026-04-26"
+
+  maternity:
+    rule: 自治区机关、企事业单位女职工在国家规定 98 天产假基础上大幅延长，部分单位最长可至 1 年。
+    daysTable:
+      - condition: 自治区机关事业单位（参照执行）
+        days: "至 1 年"
+        paid: full
+      - condition: 企业女职工（参照执行）
+        days: "98 天 + 60 天延长起，按本单位规定"
+        paid: full
+      - condition: 难产
+        days: "+15"
+        paid: full
+      - condition: 多胞胎（每多生育 1 个婴儿）
+        days: "+15"
+        paid: full
+    notes: 西藏产假规定与内地差异较大，企业与机关事业单位执行口径不同，请通过引证链接核对所在单位适用细则。
+    citations:
+      - title: 西藏自治区人口与计划生育条例
+        url: https://www.xizang.gov.cn/xwzx_406/bmkx/202302/t20230227_343388.html
+        source: local-gov
+      - title: 西藏自治区职工生育保险办法
+        url: https://www.xizang.gov.cn/zwgk/zfxxgk/fdzdgknr/zc/gz/202211/t20221128_330296.html
+        source: local-gov
+    lastVerified: "2026-04-26"
+
+  paternity:
+    rule: 男方享受 30 天护理假。
+    daysTable:
+      - condition: 配偶生育（合法生育子女）
+        days: 30
+        paid: full
+    citations:
+      - title: 西藏自治区人口与计划生育条例
+        url: https://www.xizang.gov.cn/xwzx_406/bmkx/202302/t20230227_343388.html
+        source: local-gov
+    lastVerified: "2026-04-26"
+
+  parental:
+    rule: 子女三周岁以下的，夫妻双方每年各享受 10 天育儿假。
+    daysTable:
+      - condition: 子女不满 3 周岁（夫妻双方各自）
+        days: 10
+        paid: full
+    citations:
+      - title: 西藏自治区人口与计划生育条例
+        url: https://www.xizang.gov.cn/xwzx_406/bmkx/202302/t20230227_343388.html
+        source: local-gov
+    lastVerified: "2026-04-26"

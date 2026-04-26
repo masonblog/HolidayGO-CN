@@ -1,0 +1,61 @@
+code: "61"
+name: 陕西省
+# 来源：陕西省人口与计划生育条例（2022 修正版）。陕西二孩、三孩产假延长较多。
+leaveTypes:
+  marriage:
+    rule: 陕西省婚假为 3 天，与中央一致。
+    daysTable:
+      - condition: 依法办理结婚登记
+        days: 3
+        paid: full
+    citations:
+      - title: 陕西省人口与计划生育条例
+        url: https://www.shaanxi.gov.cn/zfxxgk/zcwjk/dfxfg/202402/t20240226_2320584.html
+        source: local-gov
+    lastVerified: "2026-04-26"
+
+  maternity:
+    rule: 在国家规定 98 天产假基础上，按胎次延长产假；二孩、三孩有较大幅度增加。
+    daysTable:
+      - condition: 生育第一个子女（98 天 + 60 天延长）
+        days: 158
+        paid: full
+      - condition: 生育第二、第三个子女（在 158 天基础上再延长）
+        days: "168–350"
+        paid: full
+      - condition: 难产
+        days: "+15"
+        paid: full
+      - condition: 多胞胎（每多生育 1 个婴儿）
+        days: "+15"
+        paid: full
+    notes: 陕西二孩、三孩产假具体延长幅度各设区市略有差异，建议通过引证链接核对所在地市最新执行口径。
+    citations:
+      - title: 陕西省人口与计划生育条例
+        url: https://www.shaanxi.gov.cn/zfxxgk/zcwjk/dfxfg/202402/t20240226_2320584.html
+        source: local-gov
+    lastVerified: "2026-04-26"
+
+  paternity:
+    rule: 男方享受 15 天护理假。
+    daysTable:
+      - condition: 配偶生育（合法生育子女）
+        days: 15
+        paid: full
+    citations:
+      - title: 陕西省人口与计划生育条例
+        url: https://www.shaanxi.gov.cn/zfxxgk/zcwjk/dfxfg/202402/t20240226_2320584.html
+        source: local-gov
+    lastVerified: "2026-04-26"
+
+  parental:
+    rule: 子女三周岁以下的，夫妻双方每年各享受 10 天育儿假。
+    daysTable:
+      - condition: 子女不满 3 周岁（夫妻双方各自）
+        days: 10
+        paid: full
+    citations:
+      - title: 陕西省人口与计划生育条例
+        url: https://www.shaanxi.gov.cn/zfxxgk/zcwjk/dfxfg/202402/t20240226_2320584.html
+        source: local-gov
+    lastVerified: "2026-04-26"

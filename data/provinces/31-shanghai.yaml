@@ -1,0 +1,61 @@
+code: "31"
+name: 上海市
+# 来源：上海市人口与计划生育条例（2016 修正后取消晚婚晚育假；2021 修正引入育儿假）。
+leaveTypes:
+  marriage:
+    rule: 上海市自 2016 年修正条例后，婚假与中央保持一致为 3 天，未保留奖励性延长。
+    daysTable:
+      - condition: 依法办理结婚登记
+        days: 3
+        paid: full
+    citations:
+      - title: 上海市人口与计划生育条例
+        url: https://www.shanghai.gov.cn/jcsfbrkcqjhfzzh/20230621/c440fb200a9b48da87aed931e369792f.html
+        source: local-pc
+    lastVerified: "2026-04-26"
+
+  maternity:
+    rule: 在中央 98 天产假基础上，符合本条例规定生育的女职工延长 60 天产假；难产、多胞胎依法另行增加。
+    daysTable:
+      - condition: 正常生育（98 天 + 60 天延长产假）
+        days: 158
+        paid: full
+      - condition: 难产
+        days: "+15"
+        paid: full
+      - condition: 多胞胎（每多生育 1 个婴儿）
+        days: "+15"
+        paid: full
+    notes: 产假期间生育津贴由生育保险基金支付。本条数据建议通过引证链接核对最新条款。
+    citations:
+      - title: 上海市人口与计划生育条例 第三十一条
+        url: https://www.shanghai.gov.cn/jcsfbrkcqjhfzzh/20230621/c440fb200a9b48da87aed931e369792f.html
+        source: local-pc
+        article: 第三十一条
+    lastVerified: "2026-04-26"
+
+  paternity:
+    rule: 配偶在合法生育期间，男方享受 10 天陪产假，工资照发。
+    daysTable:
+      - condition: 配偶生育（合法生育子女）
+        days: 10
+        paid: full
+    citations:
+      - title: 上海市人口与计划生育条例 第三十一条
+        url: https://www.shanghai.gov.cn/jcsfbrkcqjhfzzh/20230621/c440fb200a9b48da87aed931e369792f.html
+        source: local-pc
+        article: 第三十一条
+    lastVerified: "2026-04-26"
+
+  parental:
+    rule: 在子女年满 3 周岁前，夫妻每人每年享受 5 天育儿假。
+    daysTable:
+      - condition: 子女不满 3 周岁（夫妻双方各自）
+        days: 5
+        paid: full
+    notes: 育儿假按工作日计算，工资、奖金、福利待遇视同正常出勤。建议通过引证链接核对最新条款。
+    citations:
+      - title: 上海市人口与计划生育条例
+        url: https://www.shanghai.gov.cn/jcsfbrkcqjhfzzh/20230621/c440fb200a9b48da87aed931e369792f.html
+        source: local-pc
+    lastVerified: "2026-04-26"
