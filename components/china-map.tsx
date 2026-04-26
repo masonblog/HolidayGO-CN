@@ -8,12 +8,44 @@ import mapData from "@/lib/china-map-data.json";
 
 type Props = {
   available: Set<string>;
+  heatMap: Map<string, number>;
   className?: string;
 };
 
 const SMALL_REGIONS = new Set(["11", "12", "31", "81", "82"]);
+const EXCLUDED_CODES = new Set(["71", "81", "82"]);
 
-export function ChinaMap({ available, className }: Props) {
+const HEAT_LEVELS = [
+  {
+    min: 200,
+    className:
+      "fill-green-500/60 stroke-green-600 hover:fill-green-500/80 cursor-pointer dark:fill-green-400/50 dark:stroke-green-300 dark:hover:fill-green-400/70",
+  },
+  {
+    min: 190,
+    className:
+      "fill-yellow-400/60 stroke-yellow-500 hover:fill-yellow-400/80 cursor-pointer dark:fill-yellow-300/50 dark:stroke-yellow-200 dark:hover:fill-yellow-300/70",
+  },
+  {
+    min: 180,
+    className:
+      "fill-red-500/60 stroke-red-600 hover:fill-red-500/80 cursor-pointer dark:fill-red-400/50 dark:stroke-red-300 dark:hover:fill-red-400/70",
+  },
+  {
+    min: 0,
+    className:
+      "fill-amber-800/60 stroke-amber-900 hover:fill-amber-800/80 cursor-pointer dark:fill-amber-700/50 dark:stroke-amber-600 dark:hover:fill-amber-700/70",
+  },
+];
+
+function getHeatColorClass(value: number): string {
+  for (const level of HEAT_LEVELS) {
+    if (value >= level.min) return level.className;
+  }
+  return HEAT_LEVELS[HEAT_LEVELS.length - 1].className;
+}
+
+export function ChinaMap({ available, heatMap, className }: Props) {
   const router = useRouter();
   const [hovered, setHovered] = useState<string | null>(null);
   const [tooltip, setTooltip] = useState<{
@@ -77,8 +109,8 @@ export function ChinaMap({ available, className }: Props) {
         {mapData.provinces.map((prov) => {
           const region = REGION_BY_CODE.get(prov.code);
           const isSmall = SMALL_REGIONS.has(prov.code);
-          const hasData = available.has(prov.code);
           const isClickable = !!region;
+          const heatValue = heatMap.get(prov.code);
 
           return (
             <g key={prov.code}>
@@ -86,10 +118,8 @@ export function ChinaMap({ available, className }: Props) {
                 d={prov.d}
                 className={cn(
                   "transition-colors duration-200",
-                  isClickable
-                    ? hasData
-                      ? "fill-primary/20 stroke-primary/50 hover:fill-primary/35 cursor-pointer dark:fill-primary/25 dark:stroke-primary/60 dark:hover:fill-primary/40"
-                      : "fill-muted/15 stroke-border/80 hover:fill-muted/25 cursor-pointer dark:fill-muted/20 dark:stroke-muted/60 dark:hover:fill-muted/30"
+                  isClickable && heatValue !== undefined
+                    ? getHeatColorClass(heatValue)
                     : "fill-muted/5 stroke-muted/20 cursor-default"
                 )}
                 strokeWidth={20000}
@@ -120,14 +150,11 @@ export function ChinaMap({ available, className }: Props) {
                   y={prov.cy}
                   textAnchor="middle"
                   dominantBaseline="middle"
-                  className={cn(
-                    "pointer-events-none select-none font-medium",
-                    isClickable
-                      ? hasData
-                        ? "fill-primary dark:fill-primary-foreground"
-                        : "fill-muted-foreground"
-                      : "fill-muted-foreground/50"
-                  )}
+                  className="pointer-events-none select-none font-medium fill-slate-800 dark:fill-slate-100"
+                  stroke="white"
+                  strokeWidth={20000}
+                  strokeOpacity={0.5}
+                  paintOrder="stroke"
                   style={{ fontSize: 130000 }}
                 >
                   {region.short}
@@ -153,9 +180,12 @@ export function ChinaMap({ available, className }: Props) {
           <div className="text-xs text-muted-foreground">
             {(() => {
               const code = tooltip.code;
+              if (EXCLUDED_CODES.has(code)) return "不在本次统计范围内";
               const region = REGION_BY_CODE.get(code);
               if (!region) return "暂无数据";
-              return available.has(code) ? "有省级特别规定" : "沿用中央规定";
+              const heat = heatMap.get(code);
+              if (heat === undefined) return "暂无数据";
+              return `假期热力值：${heat} 天`;
             })()}
           </div>
         </div>
