@@ -83,11 +83,11 @@ export default async function HomePage() {
               <span className="inline-block h-3 w-3 rounded-sm bg-gray-400/40 border border-gray-500" />
               <span className="text-xs">未统计</span>
             </div>
+            <p className="text-[10px] text-muted-foreground/60 pt-2">
+              港澳台地区不在本次统计范围内。
+            </p>
           </div>
         </div>
-        <p className="text-center text-[10px] text-muted-foreground/60">
-          港澳台地区不在本次统计范围内。
-        </p>
       </section>
 
       <section className="space-y-3">
