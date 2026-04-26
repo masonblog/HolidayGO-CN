@@ -10,8 +10,6 @@
 
 **直接访问**: [https://masonblog.github.io/HolidayGO-CN](https://masonblog.github.io/HolidayGO-CN)
 
-> 每次推送到 `master` 分支后，GitHub Actions 会自动构建并部署，约 1-2 分钟后生效。
-
 ---
 
 ## 功能与使用方法
