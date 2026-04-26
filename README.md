@@ -8,21 +8,18 @@
 
 ---
 
-## 覆盖范围
+## 在线使用
 
-| 假期类型       | 说明                   |
-| ---------- | -------------------- |
-| **年休假**    | 按累计工作年限确定 5～15 天带薪假期 |
-| **婚假**     | 法定 3 天 + 各地奖励性延长天数   |
-| **产假**     | 正常生育、难产、多胞胎、流产等情形    |
-| **陪产/护理假** | 男方在配偶生育期间的带薪陪护假      |
-| **育儿假**    | 子女三周岁前父母每年可休的带薪假期    |
-| **探亲假**    | 与父母或配偶分居两地的职工探亲待遇    |
-| **病假**     | 因病或非因工负伤的医疗期及病假工资标准  |
+| 平台 | 地址 | 说明 |
+|------|------|------|
+| **GitHub Pages** | [https://masonblog.github.io/HolidayGO-CN](https://masonblog.github.io/HolidayGO-CN) | 国内访问较慢，但稳定可用 |
+| **Cloudflare Pages** | `https://holidaygo-cn.pages.dev` | 国内访问较快，配置成功后可用 |
+
+> **提示**：Cloudflare Pages 地址需要在仓库 Secrets 中配置 `CLOUDFLARE_API_TOKEN` 和 `CLOUDFLARE_ACCOUNT_ID` 后才会自动部署。详见下方 [部署方式](#部署方式)。
 
 ---
 
-## 如何使用
+## 功能与使用方法
 
 ### 1. 地图导航
 
@@ -40,6 +37,91 @@
 - **本地** — 本省地方性法规、条例或实施办法
 
 每条规则下方均附有原文链接（全国人大法律数据库、中国政府网、人社部及地方官网），方便你进一步核实。
+
+---
+
+## 覆盖范围
+
+| 假期类型       | 说明                   |
+| ---------- | -------------------- |
+| **年休假**    | 按累计工作年限确定 5～15 天带薪假期 |
+| **婚假**     | 法定 3 天 + 各地奖励性延长天数   |
+| **产假**     | 正常生育、难产、多胞胎、流产等情形    |
+| **陪产/护理假** | 男方在配偶生育期间的带薪陪护假      |
+| **育儿假**    | 子女三周岁前父母每年可休的带薪假期    |
+| **探亲假**    | 与父母或配偶分居两地的职工探亲待遇    |
+| **病假**     | 因病或非因工负伤的医疗期及病假工资标准  |
+
+---
+
+## 本地开发
+
+### 环境要求
+
+- Node.js >= 22
+- npm >= 10
+
+### 安装依赖
+
+```bash
+npm install
+```
+
+### 本地预览
+
+```bash
+npm run dev
+```
+
+在浏览器打开 [http://localhost:3000](http://localhost:3000) 即可预览。
+
+### 构建静态站点
+
+```bash
+npm run build
+```
+
+构建产物输出到 `out/` 目录，可直接作为静态网站部署到任何托管平台。
+
+### 代码检查
+
+```bash
+npm run lint        # ESLint 检查
+npm run typecheck   # TypeScript 类型检查
+npm run validate-data   # 校验假期数据格式
+```
+
+---
+
+## 部署方式
+
+本项目为纯静态站点（Next.js `output: 'export'`），支持部署到任何静态托管平台。
+
+### GitHub Pages（默认已启用）
+
+1. 进入仓库 **Settings → Pages**
+2. **Build and deployment → Source** 选择 **GitHub Actions**
+3. 每次推送到 `main`/`master` 分支时，GitHub Actions 会自动构建并部署
+
+### Cloudflare Pages（可选，推荐国内访问）
+
+1. 在 GitHub 仓库中添加两个 Secrets（**Settings → Secrets and variables → Actions**）：
+   - `CLOUDFLARE_API_TOKEN`：在 [Cloudflare 个人资料 → API Tokens](https://dash.cloudflare.com/profile/api-tokens) 创建，权限选择 `Cloudflare Pages:Edit`
+   - `CLOUDFLARE_ACCOUNT_ID`：在 [Cloudflare Dashboard](https://dash.cloudflare.com) 右侧边栏查看 Account ID
+2. 推送代码后，GitHub Actions 会自动将 `out/` 目录部署到 `https://holidaygo-cn.pages.dev`
+
+> **注意**：请勿在 Cloudflare Dashboard 中直接连接 GitHub 仓库进行部署。Cloudflare 会自动将 Next.js 项目识别为 Workers（SSR）模式并注入 OpenNext 适配器，导致与纯静态导出不兼容而构建失败。请始终使用 GitHub Actions 方式部署。
+
+---
+
+## 技术栈
+
+- **框架**: [Next.js 16](https://nextjs.org/)（App Router + 静态导出）
+- **语言**: TypeScript
+- **样式**: Tailwind CSS
+- **UI 组件**: Radix UI + shadcn/ui
+- **数据格式**: YAML（便于人工编辑和版本管理）
+- **部署**: GitHub Actions → GitHub Pages / Cloudflare Pages
 
 ---
 
