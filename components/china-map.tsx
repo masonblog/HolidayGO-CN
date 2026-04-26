@@ -15,6 +15,12 @@ type Props = {
 const SMALL_REGIONS = new Set(["11", "12", "31", "81", "82"]);
 const EXCLUDED_CODES = new Set(["71", "81", "82"]);
 
+const FALLBACK_NAMES: Record<string, string> = {
+  "71": "台湾省",
+  "81": "香港特别行政区",
+  "82": "澳门特别行政区",
+};
+
 const HEAT_LEVELS = [
   {
     min: 200,
@@ -175,7 +181,7 @@ export function ChinaMap({ available, heatMap, className }: Props) {
           }}
         >
           <div className="font-medium">
-            {REGION_BY_CODE.get(tooltip.code)?.name ?? tooltip.code}
+            {REGION_BY_CODE.get(tooltip.code)?.name ?? FALLBACK_NAMES[tooltip.code] ?? tooltip.code}
           </div>
           <div className="text-xs text-muted-foreground">
             {(() => {
