@@ -10,12 +10,9 @@
 
 ## 在线使用
 
-| 平台 | 地址 | 说明 |
-|------|------|------|
-| **GitHub Pages** | [https://masonblog.github.io/HolidayGO-CN](https://masonblog.github.io/HolidayGO-CN) | 国内访问较慢，但稳定可用 |
-| **Cloudflare Pages** | `https://holidaygo-cn.pages.dev` | 国内访问较快，配置成功后可用 |
+**GitHub Pages**: [https://masonblog.github.io/HolidayGO-CN](https://masonblog.github.io/HolidayGO-CN)
 
-> **提示**：Cloudflare Pages 地址需要在仓库 Secrets 中配置 `CLOUDFLARE_API_TOKEN` 和 `CLOUDFLARE_ACCOUNT_ID` 后才会自动部署。详见下方 [部署方式](#部署方式)。
+> 每次推送到 `master` 分支后，GitHub Actions 会自动构建并部署，约 1-2 分钟后生效。
 
 ---
 
@@ -95,22 +92,17 @@ npm run validate-data   # 校验假期数据格式
 
 ## 部署方式
 
-本项目为纯静态站点（Next.js `output: 'export'`），支持部署到任何静态托管平台。
+本项目为纯静态站点（Next.js `output: 'export'`），通过 **GitHub Actions** 自动部署到 **GitHub Pages**。
 
-### GitHub Pages（默认已启用）
+### 配置步骤
 
 1. 进入仓库 **Settings → Pages**
 2. **Build and deployment → Source** 选择 **GitHub Actions**
-3. 每次推送到 `main`/`master` 分支时，GitHub Actions 会自动构建并部署
+3. 每次推送到 `master` 分支时，Actions 会自动构建并部署
 
-### Cloudflare Pages（可选，推荐国内访问）
+### 部署到其他平台
 
-1. 在 GitHub 仓库中添加两个 Secrets（**Settings → Secrets and variables → Actions**）：
-   - `CLOUDFLARE_API_TOKEN`：在 [Cloudflare 个人资料 → API Tokens](https://dash.cloudflare.com/profile/api-tokens) 创建，权限选择 `Cloudflare Pages:Edit`
-   - `CLOUDFLARE_ACCOUNT_ID`：在 [Cloudflare Dashboard](https://dash.cloudflare.com) 右侧边栏查看 Account ID
-2. 推送代码后，GitHub Actions 会自动将 `out/` 目录部署到 `https://holidaygo-cn.pages.dev`
-
-> **注意**：请勿在 Cloudflare Dashboard 中直接连接 GitHub 仓库进行部署。Cloudflare 会自动将 Next.js 项目识别为 Workers（SSR）模式并注入 OpenNext 适配器，导致与纯静态导出不兼容而构建失败。请始终使用 GitHub Actions 方式部署。
+构建产物输出到 `out/` 目录，可直接上传到任何静态托管平台（Vercel、Cloudflare Pages、Netlify、腾讯云 COS 等）。注意：若部署到根域名，请移除 `next.config.mjs` 中的 `basePath` 和 `assetPrefix` 配置。
 
 ---
 
@@ -121,7 +113,7 @@ npm run validate-data   # 校验假期数据格式
 - **样式**: Tailwind CSS
 - **UI 组件**: Radix UI + shadcn/ui
 - **数据格式**: YAML（便于人工编辑和版本管理）
-- **部署**: GitHub Actions → GitHub Pages / Cloudflare Pages
+- **部署**: GitHub Actions → GitHub Pages
 
 ---
 
