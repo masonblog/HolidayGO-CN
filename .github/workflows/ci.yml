@@ -28,6 +28,8 @@ jobs:
       - run: npm run typecheck
       # - run: npm run lint  # ESLint 9.x 需迁移至 eslint.config.js，暂跳过
       - run: npm run build
+        env:
+          GITHUB_PAGES: true
       - uses: actions/upload-artifact@v4
         with:
           name: out

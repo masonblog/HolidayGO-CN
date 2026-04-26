@@ -1,8 +1,10 @@
+const isGitHubPages = process.env.GITHUB_PAGES === "true";
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   output: "export",
-  basePath: "/HolidayGO-CN",
-  assetPrefix: "/HolidayGO-CN",
+  basePath: isGitHubPages ? "/HolidayGO-CN" : "",
+  assetPrefix: isGitHubPages ? "/HolidayGO-CN" : "",
   images: { unoptimized: true },
   trailingSlash: true,
   reactStrictMode: true,
