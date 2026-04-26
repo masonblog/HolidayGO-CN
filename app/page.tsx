@@ -49,37 +49,42 @@ export default async function HomePage() {
         </p>
       </section>
 
-      <section className="space-y-3">
-        <h2 className="text-sm font-medium text-muted-foreground">
-          假期热力图（婚假 + 正常生育产假 + 陪产/护理假天数）
-        </h2>
-        <ChinaMap available={available} heatMap={heatMap} />
-        <p className="text-center text-[11px] text-muted-foreground">
-          <span className="inline-flex items-center gap-1">
-            <span className="inline-block h-2.5 w-2.5 rounded-sm bg-green-500/60 border border-green-600" />
-            高（≥200天）
-          </span>
-          <span className="mx-2">·</span>
-          <span className="inline-flex items-center gap-1">
-            <span className="inline-block h-2.5 w-2.5 rounded-sm bg-yellow-400/60 border border-yellow-500" />
-            较高（190–199天）
-          </span>
-          <span className="mx-2">·</span>
-          <span className="inline-flex items-center gap-1">
-            <span className="inline-block h-2.5 w-2.5 rounded-sm bg-red-500/60 border border-red-600" />
-            中等（180–189天）
-          </span>
-          <span className="mx-2">·</span>
-          <span className="inline-flex items-center gap-1">
-            <span className="inline-block h-2.5 w-2.5 rounded-sm bg-amber-800/60 border border-amber-900" />
-            较低（&lt;180天）
-          </span>
-          <span className="mx-2">·</span>
-          <span className="inline-flex items-center gap-1">
-            <span className="inline-block h-2.5 w-2.5 rounded-sm bg-gray-400/40 border border-gray-500" />
-            未统计
-          </span>
-        </p>
+      <section className="space-y-4">
+        <div className="text-center space-y-1">
+          <h2 className="text-xl font-bold tracking-tight md:text-2xl">
+            假期热力图
+          </h2>
+          <p className="text-sm text-muted-foreground">
+            婚假 + 正常生育产假 + 陪产/护理假天数
+          </p>
+        </div>
+        <div className="flex gap-6 items-start">
+          <div className="flex-1">
+            <ChinaMap available={available} heatMap={heatMap} />
+          </div>
+          <div className="space-y-3 pt-8">
+            <div className="flex items-center gap-2">
+              <span className="inline-block h-3 w-3 rounded-sm bg-green-500/60 border border-green-600" />
+              <span className="text-xs">高（≥200天）</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <span className="inline-block h-3 w-3 rounded-sm bg-yellow-400/60 border border-yellow-500" />
+              <span className="text-xs">较高（190–199天）</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <span className="inline-block h-3 w-3 rounded-sm bg-red-500/60 border border-red-600" />
+              <span className="text-xs">中等（180–189天）</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <span className="inline-block h-3 w-3 rounded-sm bg-red-900/60 border border-red-950" />
+              <span className="text-xs">较低（&lt;180天）</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <span className="inline-block h-3 w-3 rounded-sm bg-gray-400/40 border border-gray-500" />
+              <span className="text-xs">未统计</span>
+            </div>
+          </div>
+        </div>
         <p className="text-center text-[10px] text-muted-foreground/60">
           港澳台地区不在本次统计范围内。
         </p>
