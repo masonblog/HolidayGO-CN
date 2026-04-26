@@ -41,7 +41,7 @@ export default async function HomePage() {
     <div className="space-y-10">
       <section className="space-y-3">
         <h1 className="text-2xl font-bold tracking-tight md:text-3xl">
-          按地区查询假期政策
+          中国假期政策查询
         </h1>
         <p className="max-w-2xl text-sm text-muted-foreground md:text-base">
           以中央法规为基础，叠加各省级行政区的特别规定。选择你所在的地区，
