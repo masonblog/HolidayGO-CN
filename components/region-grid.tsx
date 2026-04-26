@@ -68,11 +68,7 @@ export function RegionGrid({ available }: Props) {
                   >
                     <div className="flex items-center justify-between gap-2">
                       <span className="font-medium">{r.short}</span>
-                      {available.has(r.code) ? (
-                        <span className="text-[10px] rounded bg-primary/10 px-1.5 py-0.5 text-primary">
-                          有特别规定
-                        </span>
-                      ) : (
+                      {!available.has(r.code) && (
                         <span className="text-[10px] text-muted-foreground">
                           沿用中央
                         </span>
