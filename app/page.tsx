@@ -58,8 +58,8 @@ export default async function HomePage() {
             假期热力值=婚假 + 正常生育产假 + 陪产/护理假天数
           </p>
         </div>
-        <div className="flex gap-6 items-start">
-          <div className="flex-1">
+        <div className="flex flex-col md:flex-row gap-6 items-start">
+          <div className="w-full md:flex-1">
             <ChinaMap available={available} heatMap={heatMap} />
           </div>
           <div className="space-y-3 pt-8">
