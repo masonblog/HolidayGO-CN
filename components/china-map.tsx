@@ -34,7 +34,7 @@ const HEAT_LEVELS = [
   {
     min: 0,
     className:
-      "fill-amber-800/60 stroke-amber-900 hover:fill-amber-800/80 cursor-pointer dark:fill-amber-700/50 dark:stroke-amber-600 dark:hover:fill-amber-700/70",
+      "fill-red-900/60 stroke-red-950 hover:fill-red-900/80 cursor-pointer dark:fill-red-800/50 dark:stroke-red-700 dark:hover:fill-red-800/70",
   },
 ];
 
