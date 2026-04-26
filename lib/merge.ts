@@ -15,7 +15,13 @@ export function mergePolicy(
 ): MergedLeave[] {
   return LEAVE_KEYS.map<MergedLeave>((key) => {
     const local = region?.leaveTypes?.[key];
-    if (local) return { key, origin: "regional", data: local };
+    if (local) {
+      // 婚假为3天属于沿用中央规定，不视为地方特别规定
+      if (key === "marriage" && local.daysTable?.some(row => row.days === 3)) {
+        return { key, origin: "central", data: central.leaveTypes[key] };
+      }
+      return { key, origin: "regional", data: local };
+    }
     return { key, origin: "central", data: central.leaveTypes[key] };
   });
 }
