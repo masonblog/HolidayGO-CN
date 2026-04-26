@@ -1,0 +1,58 @@
+code: "65"
+name: 新疆维吾尔自治区
+# 来源：新疆维吾尔自治区人口与计划生育条例（2022 修正版）。
+leaveTypes:
+  marriage:
+    rule: 新疆婚假为 3 天，与中央一致。
+    daysTable:
+      - condition: 依法办理结婚登记
+        days: 3
+        paid: full
+    citations:
+      - title: 新疆维吾尔自治区人口与计划生育条例
+        url: https://wjw.xinjiang.gov.cn/hfpc/zcwj/202206/08522918e7484cdc9813a66a90635d3b.shtml
+        source: local-gov
+    lastVerified: "2026-04-26"
+
+  maternity:
+    rule: 在国家规定 98 天产假基础上延长 60 天。
+    daysTable:
+      - condition: 正常生育（98 天 + 60 天延长产假）
+        days: 158
+        paid: full
+      - condition: 难产
+        days: "+15"
+        paid: full
+      - condition: 多胞胎（每多生育 1 个婴儿）
+        days: "+15"
+        paid: full
+    notes: 建议通过引证链接核对最新条款。
+    citations:
+      - title: 新疆维吾尔自治区人口与计划生育条例
+        url: https://wjw.xinjiang.gov.cn/hfpc/zcwj/202206/08522918e7484cdc9813a66a90635d3b.shtml
+        source: local-gov
+    lastVerified: "2026-04-26"
+
+  paternity:
+    rule: 男方享受 15 天护理假。
+    daysTable:
+      - condition: 配偶生育（合法生育子女）
+        days: 15
+        paid: full
+    citations:
+      - title: 新疆维吾尔自治区人口与计划生育条例
+        url: https://wjw.xinjiang.gov.cn/hfpc/zcwj/202206/08522918e7484cdc9813a66a90635d3b.shtml
+        source: local-gov
+    lastVerified: "2026-04-26"
+
+  parental:
+    rule: 子女三周岁以下的，夫妻双方每年各享受 10 天育儿假。
+    daysTable:
+      - condition: 子女不满 3 周岁（夫妻双方各自）
+        days: 10
+        paid: full
+    citations:
+      - title: 新疆维吾尔自治区人口与计划生育条例
+        url: https://wjw.xinjiang.gov.cn/hfpc/zcwj/202206/08522918e7484cdc9813a66a90635d3b.shtml
+        source: local-gov
+    lastVerified: "2026-04-26"

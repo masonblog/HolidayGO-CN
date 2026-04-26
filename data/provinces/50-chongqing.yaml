@@ -1,0 +1,65 @@
+code: "50"
+name: 重庆市
+# 来源：重庆市人口与计划生育条例（2021 修正版）。
+leaveTypes:
+  marriage:
+    rule: 重庆市婚假为 3 天，与中央一致；女方在适龄结婚的，可向用人单位申请延长婚假至 15 天（用人单位可以视情况批准）。
+    daysTable:
+      - condition: 依法办理结婚登记
+        days: 3
+        paid: full
+      - condition: 适龄女方申请延长婚假（用人单位批准）
+        days: "至 15"
+        paid: full
+    notes: 重庆市的延长婚假规定较特殊（视用人单位批准），建议通过引证链接核对最新条款。
+    citations:
+      - title: 重庆市人口与计划生育条例
+        url: https://wsjkw.cq.gov.cn/ztzl_242/fzjs/fg/202112/t20211230_10258789.html
+        source: local-gov
+    lastVerified: "2026-04-26"
+
+  maternity:
+    rule: 在国家规定 98 天产假基础上延长 80 天，并可向用人单位申请延长产假至子女满 1 岁（用人单位批准）。
+    daysTable:
+      - condition: 正常生育（98 天 + 80 天延长产假）
+        days: 178
+        paid: full
+      - condition: 经申请并经用人单位批准，最长延长至子女满 1 岁
+        days: "至 1 年"
+        paid: partial
+      - condition: 难产
+        days: "+15"
+        paid: full
+      - condition: 多胞胎（每多生育 1 个婴儿）
+        days: "+15"
+        paid: full
+    citations:
+      - title: 重庆市人口与计划生育条例
+        url: https://wsjkw.cq.gov.cn/ztzl_242/fzjs/fg/202112/t20211230_10258789.html
+        source: local-gov
+    lastVerified: "2026-04-26"
+
+  paternity:
+    rule: 男方享受 20 天护理假。
+    daysTable:
+      - condition: 配偶生育（合法生育子女）
+        days: 20
+        paid: full
+    citations:
+      - title: 重庆市人口与计划生育条例
+        url: https://wsjkw.cq.gov.cn/ztzl_242/fzjs/fg/202112/t20211230_10258789.html
+        source: local-gov
+    lastVerified: "2026-04-26"
+
+  parental:
+    rule: 子女六周岁以下的，夫妻双方每年各享受 5 至 10 天育儿假。
+    daysTable:
+      - condition: 子女不满 6 周岁（夫妻双方各自）
+        days: "5–10"
+        paid: full
+    notes: 重庆市育儿假覆盖至子女 6 周岁，时长在地方文件中存在 5–10 天的口径差异，建议通过引证链接核对最新条款。
+    citations:
+      - title: 重庆市人口与计划生育条例
+        url: https://wsjkw.cq.gov.cn/ztzl_242/fzjs/fg/202112/t20211230_10258789.html
+        source: local-gov
+    lastVerified: "2026-04-26"

@@ -1,0 +1,58 @@
+code: "62"
+name: 甘肃省
+# 来源：甘肃省人口与计划生育条例（2021 修正版）。甘肃在产假与育儿假上较中央延长。
+leaveTypes:
+  marriage:
+    rule: 甘肃省婚假为 3 天，与中央一致；适龄结婚夫妻可由所在单位适当延长。
+    daysTable:
+      - condition: 依法办理结婚登记
+        days: 3
+        paid: full
+    notes: 部分单位有自主决定的延长婚假，建议通过引证链接核对最新条款。
+    citations:
+      - title: 甘肃省人口与计划生育条例
+        url: http://wsjk.gansu.gov.cn/wsjk/c113458/202112/1934187.shtml
+        source: local-gov
+    lastVerified: "2026-04-26"
+
+  maternity:
+    rule: 在国家规定 98 天产假基础上延长，全省合计为 180 天。
+    daysTable:
+      - condition: 正常生育（合计 180 天）
+        days: 180
+        paid: full
+      - condition: 难产
+        days: "+15"
+        paid: full
+      - condition: 多胞胎（每多生育 1 个婴儿）
+        days: "+15"
+        paid: full
+    citations:
+      - title: 甘肃省人口与计划生育条例
+        url: http://wsjk.gansu.gov.cn/wsjk/c113458/202112/1934187.shtml
+        source: local-gov
+    lastVerified: "2026-04-26"
+
+  paternity:
+    rule: 男方享受 15 天护理假。
+    daysTable:
+      - condition: 配偶生育（合法生育子女）
+        days: 15
+        paid: full
+    citations:
+      - title: 甘肃省人口与计划生育条例
+        url: http://wsjk.gansu.gov.cn/wsjk/c113458/202112/1934187.shtml
+        source: local-gov
+    lastVerified: "2026-04-26"
+
+  parental:
+    rule: 子女三周岁以下的，夫妻双方每年各享受 15 天育儿假。
+    daysTable:
+      - condition: 子女不满 3 周岁（夫妻双方各自）
+        days: 15
+        paid: full
+    citations:
+      - title: 甘肃省人口与计划生育条例
+        url: http://wsjk.gansu.gov.cn/wsjk/c113458/202112/1934187.shtml
+        source: local-gov
+    lastVerified: "2026-04-26"

@@ -1,0 +1,64 @@
+code: "11"
+name: 北京市
+# 仅写覆盖/特别规定字段，省略的假期类型沿用中央法规。
+leaveTypes:
+  marriage:
+    rule: 北京市婚假在中央 3 天基础上不再额外延长（2016 年修订条例后取消晚婚假奖励）。
+    daysTable:
+      - condition: 依法办理结婚登记
+        days: 3
+        paid: full
+    notes: 婚假含国家法定休假日和休息日。
+    citations:
+      - title: 北京市人口与计划生育条例 第十八条
+        url: https://www.beijing.gov.cn/zhengce/dfxfg/202111/t20211126_2546761.html
+        source: local-pc
+        article: 第十八条
+    lastVerified: "2026-04-26"
+
+  maternity:
+    rule: 北京市在国家规定 98 天产假基础上增加 60 天奖励假，符合法律法规规定生育子女的女职工依法享受。
+    daysTable:
+      - condition: 正常生育（98 天 + 60 天奖励假）
+        days: 158
+        paid: full
+      - condition: 难产
+        days: "+15"
+        paid: full
+      - condition: 多胞胎（每多生育 1 个婴儿）
+        days: "+15"
+        paid: full
+    notes: 经所在机关、企事业单位、其他组织同意，女职工还可以再增加产假 1 至 3 个月。
+    citations:
+      - title: 北京市人口与计划生育条例 第十九条
+        url: https://www.beijing.gov.cn/zhengce/dfxfg/202111/t20211126_2546761.html
+        source: local-pc
+        article: 第十九条
+    lastVerified: "2026-04-26"
+
+  paternity:
+    rule: 北京市男方享受 15 天陪产假。
+    daysTable:
+      - condition: 配偶生育（合法生育子女）
+        days: 15
+        paid: full
+    citations:
+      - title: 北京市人口与计划生育条例 第十九条
+        url: https://www.beijing.gov.cn/zhengce/dfxfg/202111/t20211126_2546761.html
+        source: local-pc
+        article: 第十九条
+    lastVerified: "2026-04-26"
+
+  parental:
+    rule: 在子女满 3 周岁前，夫妻每人每年各享 5 个工作日育儿假。
+    daysTable:
+      - condition: 子女不满 3 周岁（夫妻双方各自）
+        days: 5
+        paid: full
+    notes: 育儿假按工作日计算，工资、奖金、福利待遇视同出勤。
+    citations:
+      - title: 北京市人口与计划生育条例 第十九条
+        url: https://www.beijing.gov.cn/zhengce/dfxfg/202111/t20211126_2546761.html
+        source: local-pc
+        article: 第十九条
+    lastVerified: "2026-04-26"

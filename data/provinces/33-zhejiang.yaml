@@ -1,0 +1,61 @@
+code: "33"
+name: 浙江省
+# 来源：浙江省人口与计划生育条例（2021 修正版）。
+leaveTypes:
+  marriage:
+    rule: 浙江省婚假为 3 天，与中央一致。
+    daysTable:
+      - condition: 依法办理结婚登记
+        days: 3
+        paid: full
+    citations:
+      - title: 浙江省人口与计划生育条例
+        url: https://wsjkw.zj.gov.cn/art/2021/11/30/art_1229055224_2377398.html
+        source: local-pc
+    lastVerified: "2026-04-26"
+
+  maternity:
+    rule: 浙江省按胎次区分产假延长天数：生育第一个子女延长 60 天，生育第二、第三个子女延长 90 天。
+    daysTable:
+      - condition: 生育第一个子女（98 天 + 60 天延长）
+        days: 158
+        paid: full
+      - condition: 生育第二、第三个子女（98 天 + 90 天延长）
+        days: 188
+        paid: full
+      - condition: 难产
+        days: "+15"
+        paid: full
+      - condition: 多胞胎（每多生育 1 个婴儿）
+        days: "+15"
+        paid: full
+    notes: 建议通过引证链接核对最新条款，部分地市另有补充实施细则。
+    citations:
+      - title: 浙江省人口与计划生育条例
+        url: https://wsjkw.zj.gov.cn/art/2021/11/30/art_1229055224_2377398.html
+        source: local-pc
+    lastVerified: "2026-04-26"
+
+  paternity:
+    rule: 男方享受 15 天陪产假。
+    daysTable:
+      - condition: 配偶生育（合法生育子女）
+        days: 15
+        paid: full
+    citations:
+      - title: 浙江省人口与计划生育条例
+        url: https://wsjkw.zj.gov.cn/art/2021/11/30/art_1229055224_2377398.html
+        source: local-pc
+    lastVerified: "2026-04-26"
+
+  parental:
+    rule: 子女三周岁以下的，夫妻双方每年各享受 10 天育儿假。
+    daysTable:
+      - condition: 子女不满 3 周岁（夫妻双方各自）
+        days: 10
+        paid: full
+    citations:
+      - title: 浙江省人口与计划生育条例
+        url: https://wsjkw.zj.gov.cn/art/2021/11/30/art_1229055224_2377398.html
+        source: local-pc
+    lastVerified: "2026-04-26"

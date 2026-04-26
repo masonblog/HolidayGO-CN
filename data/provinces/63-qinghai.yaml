@@ -1,0 +1,58 @@
+code: "63"
+name: 青海省
+# 来源：青海省人口与计划生育条例（2022 修正版）。青海育儿假较长。
+leaveTypes:
+  marriage:
+    rule: 青海省在国家规定 3 天婚假基础上延长 15 天，合计 18 天。
+    daysTable:
+      - condition: 依法办理结婚登记
+        days: 18
+        paid: full
+    citations:
+      - title: 青海省人口与计划生育条例
+        url: https://qhrd.gov.cn/qhsrd/qhsdfxfg_0/sjdfxfg_79/202111/t20211130_183999.html
+        source: local-gov
+    lastVerified: "2026-04-26"
+
+  maternity:
+    rule: 在国家规定 98 天产假基础上延长 60 天。
+    daysTable:
+      - condition: 正常生育（98 天 + 60 天延长产假）
+        days: 158
+        paid: full
+      - condition: 难产
+        days: "+15"
+        paid: full
+      - condition: 多胞胎（每多生育 1 个婴儿）
+        days: "+15"
+        paid: full
+    notes: 建议通过引证链接核对最新条款。
+    citations:
+      - title: 青海省人口与计划生育条例
+        url: https://qhrd.gov.cn/qhsrd/qhsdfxfg_0/sjdfxfg_79/202111/t20211130_183999.html
+        source: local-gov
+    lastVerified: "2026-04-26"
+
+  paternity:
+    rule: 男方享受 15 天护理假。
+    daysTable:
+      - condition: 配偶生育（合法生育子女）
+        days: 15
+        paid: full
+    citations:
+      - title: 青海省人口与计划生育条例
+        url: https://qhrd.gov.cn/qhsrd/qhsdfxfg_0/sjdfxfg_79/202111/t20211130_183999.html
+        source: local-gov
+    lastVerified: "2026-04-26"
+
+  parental:
+    rule: 子女三周岁以下的，夫妻双方每年各享受 15 天育儿假。
+    daysTable:
+      - condition: 子女不满 3 周岁（夫妻双方各自）
+        days: 15
+        paid: full
+    citations:
+      - title: 青海省人口与计划生育条例
+        url: https://qhrd.gov.cn/qhsrd/qhsdfxfg_0/sjdfxfg_79/202111/t20211130_183999.html
+        source: local-gov
+    lastVerified: "2026-04-26"

@@ -1,0 +1,62 @@
+code: "35"
+name: 福建省
+# 来源：福建省人口与计划生育条例（2022 修正版）。
+leaveTypes:
+  marriage:
+    rule: 福建省在国家规定的 3 天婚假基础上延长 12 天，合计 15 天。
+    daysTable:
+      - condition: 依法办理结婚登记
+        days: 15
+        paid: full
+    notes: 含国家规定 3 天 + 省级延长 12 天。建议通过引证链接核对最新条款。
+    citations:
+      - title: 福建省人口与计划生育条例
+        url: http://www.fujian.gov.cn/zwgk/flfg/dfxfg/202204/t20220420_5896105.htm
+        source: local-pc
+    lastVerified: "2026-04-26"
+
+  maternity:
+    rule: 福建省按胎次延长产假：生育第一个子女延长 60 天，生育第二、第三个子女延长 60 天的基础上再延长。
+    daysTable:
+      - condition: 生育第一个子女（98 天 + 60 天延长）
+        days: 158
+        paid: full
+      - condition: 生育第二、第三个子女
+        days: "158 起，按胎次另行延长"
+        paid: full
+      - condition: 难产
+        days: "+15"
+        paid: full
+      - condition: 多胞胎（每多生育 1 个婴儿）
+        days: "+15"
+        paid: full
+    notes: 二孩、三孩具体延长天数请通过引证链接核对最新条款。
+    citations:
+      - title: 福建省人口与计划生育条例
+        url: http://www.fujian.gov.cn/zwgk/flfg/dfxfg/202204/t20220420_5896105.htm
+        source: local-pc
+    lastVerified: "2026-04-26"
+
+  paternity:
+    rule: 男方享受 15 天护理假。
+    daysTable:
+      - condition: 配偶生育（合法生育子女）
+        days: 15
+        paid: full
+    citations:
+      - title: 福建省人口与计划生育条例
+        url: http://www.fujian.gov.cn/zwgk/flfg/dfxfg/202204/t20220420_5896105.htm
+        source: local-pc
+    lastVerified: "2026-04-26"
+
+  parental:
+    rule: 子女三周岁以下的，夫妻双方每年各享受 10 天育儿假。
+    daysTable:
+      - condition: 子女不满 3 周岁（夫妻双方各自）
+        days: 10
+        paid: full
+    citations:
+      - title: 福建省人口与计划生育条例
+        url: http://www.fujian.gov.cn/zwgk/flfg/dfxfg/202204/t20220420_5896105.htm
+        source: local-pc
+    lastVerified: "2026-04-26"

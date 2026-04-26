@@ -1,0 +1,59 @@
+code: "41"
+name: 河南省
+# 来源：河南省人口与计划生育条例（2022 修正版）。
+leaveTypes:
+  marriage:
+    rule: 河南省婚假在中央 3 天基础上延长 18 天，合计 21 天。
+    daysTable:
+      - condition: 依法办理结婚登记
+        days: 21
+        paid: full
+    notes: 含国家规定 3 天 + 省级延长 18 天。建议通过引证链接核对最新条款。
+    citations:
+      - title: 河南省人口与计划生育条例
+        url: https://www.henan.gov.cn/2021/12-22/2369518.html
+        source: local-pc
+    lastVerified: "2026-04-26"
+
+  maternity:
+    rule: 在国家规定 98 天产假基础上延长 3 个月（约 90 天）产假。
+    daysTable:
+      - condition: 正常生育（98 天 + 3 个月延长产假）
+        days: 190
+        paid: full
+      - condition: 难产
+        days: "+15"
+        paid: full
+      - condition: 多胞胎（每多生育 1 个婴儿）
+        days: "+15"
+        paid: full
+    notes: 河南省条例为产假延长「3 个月」，按工作日或自然日计算口径以最新解释为准。
+    citations:
+      - title: 河南省人口与计划生育条例
+        url: https://www.henan.gov.cn/2021/12-22/2369518.html
+        source: local-pc
+    lastVerified: "2026-04-26"
+
+  paternity:
+    rule: 男方享受护理假 1 个月（约 30 天）。
+    daysTable:
+      - condition: 配偶生育（合法生育子女）
+        days: 30
+        paid: full
+    citations:
+      - title: 河南省人口与计划生育条例
+        url: https://www.henan.gov.cn/2021/12-22/2369518.html
+        source: local-pc
+    lastVerified: "2026-04-26"
+
+  parental:
+    rule: 子女三周岁以下的，夫妻双方每年各享受 10 天育儿假。
+    daysTable:
+      - condition: 子女不满 3 周岁（夫妻双方各自）
+        days: 10
+        paid: full
+    citations:
+      - title: 河南省人口与计划生育条例
+        url: https://www.henan.gov.cn/2021/12-22/2369518.html
+        source: local-pc
+    lastVerified: "2026-04-26"
