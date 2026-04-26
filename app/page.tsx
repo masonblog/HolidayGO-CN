@@ -55,7 +55,7 @@ export default async function HomePage() {
             假期热力图
           </h2>
           <p className="text-sm text-muted-foreground">
-            婚假 + 正常生育产假 + 陪产/护理假天数
+            假期热力值=婚假 + 正常生育产假 + 陪产/护理假天数
           </p>
         </div>
         <div className="flex gap-6 items-start">
