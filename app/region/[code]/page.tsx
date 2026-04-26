@@ -6,6 +6,7 @@ import { loadCentral, loadRegion } from "@/lib/data";
 import { mergePolicy } from "@/lib/merge";
 import { LEAVE_LABELS } from "@/lib/schema";
 import { LeaveCard } from "@/components/leave-card";
+import { ProvinceOverview } from "@/components/province-overview";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 export const dynamicParams = false;
@@ -61,6 +62,8 @@ export default async function RegionPage({
             : "本地区暂无收录的特别规定，全部沿用中央法规。如有补充欢迎提交 PR。"}
         </p>
       </header>
+
+      <ProvinceOverview code={code} merged={merged} central={central} />
 
       <Tabs defaultValue="all" className="w-full">
         <TabsList>
