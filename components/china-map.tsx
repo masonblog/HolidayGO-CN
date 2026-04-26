@@ -127,7 +127,7 @@ export function ChinaMap({ available, heatMap, className }: Props) {
                   isClickable && heatValue !== undefined
                     ? getHeatColorClass(heatValue)
                     : prov.code === "71"
-                      ? "fill-muted/20 stroke-muted/40 cursor-default"
+                      ? "fill-gray-500/60 stroke-gray-600 cursor-default"
                       : "fill-muted/5 stroke-muted/20 cursor-default"
                 )}
                 strokeWidth={20000}
