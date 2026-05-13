@@ -1,5 +1,11 @@
 # 中国假期查询工具
 
+![Next.js](https://img.shields.io/badge/Next.js-16-black?logo=nextdotjs)
+![React](https://img.shields.io/badge/React-19-61DAFB?logo=react&logoColor=000)
+![TypeScript](https://img.shields.io/badge/TypeScript-5.7-3178C6?logo=typescript&logoColor=fff)
+![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-3.4-06B6D4?logo=tailwindcss&logoColor=fff)
+![GitHub Pages](https://img.shields.io/badge/Deploy-GitHub_Pages-222?logo=githubpages&logoColor=fff)
+
 > 中国大陆各省假期政策一站式查询工具
 
 **本工具** 帮助你在几十秒内查清自己所在省份的七类法定假期权益：年休假、婚假、产假、陪产/护理假、育儿假、探亲假、病假。国家层面的统一规定与各省（自治区、直辖市）的特殊规定自动合并展示，让你不用翻遍法规文件，也能快速获得准确、可溯源的假期信息。
