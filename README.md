@@ -90,17 +90,6 @@ npm run validate-data   # 校验假期数据格式
 
 ---
 
-## 技术栈
-
-- **框架**: [Next.js 16](https://nextjs.org/)（App Router + 静态导出）
-- **语言**: TypeScript
-- **样式**: Tailwind CSS
-- **UI 组件**: Radix UI + shadcn/ui
-- **数据格式**: YAML（便于人工编辑和版本管理）
-- **部署**: GitHub Actions → GitHub Pages
-
----
-
 ## 数据来源
 
 本站数据以权威官方渠道为基础，所有条文均尽量给出原始出处：
