@@ -1,4 +1,4 @@
-# 中国假期查询工具
+# HolidayGO-CN | 中国假期查询工具
 
 ![Next.js](https://img.shields.io/badge/Next.js-16-black?logo=nextdotjs)
 ![React](https://img.shields.io/badge/React-19-61DAFB?logo=react&logoColor=000)
