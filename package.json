@@ -8,7 +8,8 @@
     "start": "next start",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
     "typecheck": "tsc --noEmit",
-    "validate-data": "tsx scripts/validate-data.ts"
+    "validate-data": "tsx scripts/validate-data.ts",
+    "deploy:cloudflare": "wrangler deploy"
   },
   "dependencies": {
     "next": "16.2.4",
@@ -36,6 +37,7 @@
     "autoprefixer": "^10.4.20",
     "eslint": "^9.18.0",
     "eslint-config-next": "16.2.4",
-    "tsx": "^4.19.2"
+    "tsx": "^4.19.2",
+    "wrangler": "^4.91.0"
   }
 }
