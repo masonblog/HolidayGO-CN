@@ -9,7 +9,7 @@
 
 本工具帮助你在几十秒内查清自己所在省份的七类法定假期权益：年休假、婚假、产假、陪产/护理假、育儿假、探亲假、病假。国家层面的统一规定与各省（自治区、直辖市）的特殊规定自动合并展示，让你不用翻遍法规文件，也能快速获得准确、可溯源的假期信息。
 
-**[开始使用](https://masonblog.github.io/HolidayGO-CN)**
+[开始使用](https://masonblog.github.io/HolidayGO-CN) | [备用地址](https://holiday.masonhu.xyz)
 
 ---
 
@@ -48,61 +48,6 @@
 
 ---
 
-## 本地开发
-
-### 环境要求
-
-- Node.js >= 22
-- npm >= 10
-
-### 安装依赖
-
-```bash
-npm install
-```
-
-### 本地预览
-
-```bash
-npm run dev
-```
-
-在浏览器打开 [http://localhost:3000](http://localhost:3000) 即可预览。
-
-### 构建静态站点
-
-```bash
-npm run build
-```
-
-构建产物输出到 `out/` 目录，可直接作为静态网站部署到任何托管平台。
-
-### Cloudflare Workers 备份部署
-
-项目保留 GitHub Pages 作为主部署，同时提供 Cloudflare Workers 静态资产备份部署：[https://holiday.masonhu.xyz](https://holiday.masonhu.xyz)。Workers 构建不设置 `GITHUB_PAGES=true`，因此不会带 `/HolidayGO-CN` 路径前缀，适合部署到该自定义域名根路径。
-
-本地部署前先完成 Cloudflare 登录，然后运行：
-
-```bash
-npm run build
-npm run deploy:cloudflare
-```
-
-GitHub Actions 中的备份部署 workflow 为 `.github/workflows/cloudflare-workers.yml`。仓库需要配置以下 Secrets：
-
-- `CLOUDFLARE_API_TOKEN`
-- `CLOUDFLARE_ACCOUNT_ID`
-
-### 代码检查
-
-```bash
-npm run lint        # ESLint 检查
-npm run typecheck   # TypeScript 类型检查
-npm run validate-data   # 校验假期数据格式
-```
-
----
-
 ## 数据来源
 
 本站数据以权威官方渠道为基础，所有条文均尽量给出原始出处：
@@ -130,7 +75,3 @@ npm run validate-data   # 校验假期数据格式
 ## 反馈与共建
 
 如果你发现数据有误、链接失效，或所在省份的最新政策已有更新，欢迎通过仓库 Issue 或 Pull Request 反馈。项目以开源方式维护，社区共同校对数据，确保信息及时、准确。
-
----
-
-*Last updated: 2026-04-26*
