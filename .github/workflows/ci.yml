@@ -23,7 +23,7 @@ jobs:
         with:
           node-version: "22"
           cache: npm
-      - run: npm ci
+      - run: npm ci --no-audit --no-fund
       - run: npm run validate-data
       - run: npm run typecheck
       # - run: npm run lint  # ESLint 9.x 需迁移至 eslint.config.js，暂跳过
