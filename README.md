@@ -5,6 +5,7 @@
 ![TypeScript](https://img.shields.io/badge/TypeScript-5.7-3178C6?logo=typescript&logoColor=fff)
 ![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-3.4-06B6D4?logo=tailwindcss&logoColor=fff)
 ![GitHub Pages](https://img.shields.io/badge/Deploy-GitHub_Pages-222?logo=githubpages&logoColor=fff)
+![Cloudflare Workers](https://img.shields.io/badge/Backup-Cloudflare_Workers-F38020?logo=cloudflare&logoColor=fff)
 
 本工具帮助你在几十秒内查清自己所在省份的七类法定假期权益：年休假、婚假、产假、陪产/护理假、育儿假、探亲假、病假。国家层面的统一规定与各省（自治区、直辖市）的特殊规定自动合并展示，让你不用翻遍法规文件，也能快速获得准确、可溯源的假期信息。
 
@@ -75,6 +76,22 @@ npm run build
 ```
 
 构建产物输出到 `out/` 目录，可直接作为静态网站部署到任何托管平台。
+
+### Cloudflare Workers 备份部署
+
+项目保留 GitHub Pages 作为主部署，同时提供 Cloudflare Workers 静态资产备份部署：[https://holiday.masonhu.xyz](https://holiday.masonhu.xyz)。Workers 构建不设置 `GITHUB_PAGES=true`，因此不会带 `/HolidayGO-CN` 路径前缀，适合部署到该自定义域名根路径。
+
+本地部署前先完成 Cloudflare 登录，然后运行：
+
+```bash
+npm run build
+npm run deploy:cloudflare
+```
+
+GitHub Actions 中的备份部署 workflow 为 `.github/workflows/cloudflare-workers.yml`。仓库需要配置以下 Secrets：
+
+- `CLOUDFLARE_API_TOKEN`
+- `CLOUDFLARE_ACCOUNT_ID`
 
 ### 代码检查
 
