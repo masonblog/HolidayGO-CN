@@ -42,12 +42,29 @@ data/
 4. `lastVerified` 填核对当日 ISO 日期（YYYY-MM-DD）。
 5. 本地跑 `npm run validate-data` 与 `npm run build`，提交 PR。
 
-## 部署到 Cloudflare Pages
+## Cloudflare Workers 备份部署
 
-- Build command: `npm run build`
-- Build output directory: `out`
-- Node version: `22`
-- 不需要 `wrangler.toml`（纯静态产物）。
+项目保留 GitHub Pages 作为主部署，同时提供 Cloudflare Workers 静态资产备份部署：[https://holiday.masonhu.xyz](https://holiday.masonhu.xyz)。Workers 构建不设置 `GITHUB_PAGES=true`，因此不会带 `/HolidayGO-CN` 路径前缀，适合部署到该自定义域名根路径。
+
+本地部署前先完成 Cloudflare 登录，然后运行：
+
+```bash
+npm run build
+npm run deploy:cloudflare
+```
+
+GitHub Actions 中的备份部署 workflow 为 `.github/workflows/cloudflare-workers.yml`。仓库需要配置以下 Secrets：
+
+- `CLOUDFLARE_API_TOKEN`
+- `CLOUDFLARE_ACCOUNT_ID`
+
+## 代码检查
+
+```bash
+npm run lint        # ESLint 检查
+npm run typecheck   # TypeScript 类型检查
+npm run validate-data   # 校验假期数据格式
+```
 
 ## 路线图
 
