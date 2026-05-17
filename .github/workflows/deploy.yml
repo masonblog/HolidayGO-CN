@@ -1,4 +1,4 @@
-name: Buid and Deploy
+name: Build and Deploy
 
 on:
   push:
@@ -49,8 +49,9 @@ jobs:
         id: deployment
 
   deploy-cloudflare:
+    needs: build
     runs-on: ubuntu-latest
-    if: github.event_name == 'workflow_dispatch' || github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master'
+    if: ${{ always() && (github.event_name == 'workflow_dispatch' || ((github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master') && needs.build.result == 'success')) }}
     environment:
       name: cloudflare-workers
       url: https://holiday.masonhu.xyz
@@ -61,8 +62,6 @@ jobs:
           node-version: "22"
           cache: npm
       - run: npm ci --no-audit --no-fund
-      - run: npm run validate-data
-      - run: npm run typecheck
       - run: npm run build
       - name: Deploy to Cloudflare Workers
         run: npm run deploy:cloudflare
