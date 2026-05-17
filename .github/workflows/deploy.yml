@@ -1,9 +1,10 @@
-name: Deploy to GitHub Pages
+name: Buid and Deploy
 
 on:
   push:
     branches: [main, master]
   pull_request:
+  workflow_dispatch:
 
 permissions:
   contents: read
@@ -11,12 +12,13 @@ permissions:
   id-token: write
 
 concurrency:
-  group: "pages"
+  group: "deploy-${{ github.workflow }}-${{ github.ref }}"
   cancel-in-progress: false
 
 jobs:
   build:
     runs-on: ubuntu-latest
+    if: github.event_name != 'workflow_dispatch'
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -34,7 +36,7 @@ jobs:
         with:
           path: out
 
-  deploy:
+  deploy-github:
     needs: build
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master'
@@ -45,3 +47,25 @@ jobs:
       - name: Deploy to GitHub Pages
         uses: actions/deploy-pages@v4
         id: deployment
+
+  deploy-cloudflare:
+    runs-on: ubuntu-latest
+    if: github.event_name == 'workflow_dispatch' || github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master'
+    environment:
+      name: cloudflare-workers
+      url: https://holiday.masonhu.xyz
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+      - run: npm ci --no-audit --no-fund
+      - run: npm run validate-data
+      - run: npm run typecheck
+      - run: npm run build
+      - name: Deploy to Cloudflare Workers
+        run: npm run deploy:cloudflare
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
