@@ -6,7 +6,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
+    "lint": "eslint .",
     "typecheck": "tsc --noEmit",
     "validate-data": "tsx scripts/validate-data.ts",
     "deploy:cloudflare": "wrangler deploy"
