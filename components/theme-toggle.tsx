@@ -8,10 +8,16 @@ import { Button } from "@/components/ui/button";
 const order = ["system", "light", "dark"] as const;
 type Mode = (typeof order)[number];
 
+const emptySubscribe = () => () => {};
+
 export function ThemeToggle() {
   const { theme, setTheme } = useTheme();
-  const [mounted, setMounted] = React.useState(false);
-  React.useEffect(() => setMounted(true), []);
+  // 服务端渲染时 false，客户端水合后为 true，避免主题图标闪烁
+  const mounted = React.useSyncExternalStore(
+    emptySubscribe,
+    () => true,
+    () => false,
+  );
 
   const current: Mode = (theme as Mode) ?? "system";
   const next = (): Mode => {
