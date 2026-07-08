@@ -4,11 +4,11 @@
 
 ## 技术栈
 
-- Next.js 15 (App Router) + React 19 + TypeScript
+- Next.js 16 (App Router) + React 19 + TypeScript
 - Tailwind CSS + shadcn/ui 风格组件 + Radix UI primitives
 - next-themes（深 / 浅 / 跟随系统三态切换）
 - 数据：YAML 文件，仓库版本化，构建时由 zod 校验
-- 部署：Cloudflare Pages（`output: 'export'` 全静态产物）
+- 部署：GitHub Pages（主）+ Cloudflare Workers（备份），`output: 'export'` 全静态产物
 
 ## 本地开发
 
@@ -44,7 +44,7 @@ data/
 
 ## Cloudflare Workers 备份部署
 
-项目保留 GitHub Pages 作为主部署，同时提供 Cloudflare Workers 静态资产备份部署：[https://holiday.masonhu.xyz](https://holiday.masonhu.xyz)。Workers 构建不设置 `GITHUB_PAGES=true`，因此不会带 `/HolidayGO-CN` 路径前缀，适合部署到该自定义域名根路径。
+项目保留 GitHub Pages 作为主部署，同时提供 Cloudflare Workers 静态资产备份部署：[https://holiday.masonhu.cc](https://holiday.masonhu.cc)。Workers 构建不设置 `GITHUB_PAGES=true`，因此不会带 `/HolidayGO-CN` 路径前缀，适合部署到该自定义域名根路径。
 
 本地部署前先完成 Cloudflare 登录，然后运行：
 
@@ -53,7 +53,7 @@ npm run build
 npm run deploy:cloudflare
 ```
 
-GitHub Actions 中的备份部署 workflow 为 `.github/workflows/cloudflare-workers.yml`。仓库需要配置以下 Secrets：
+GitHub Actions 中的部署 workflow 为 `.github/workflows/deploy.yml`（GitHub Pages 与 Cloudflare Workers 在同一 workflow 内）。仓库需要配置以下 Secrets：
 
 - `CLOUDFLARE_API_TOKEN`
 - `CLOUDFLARE_ACCOUNT_ID`

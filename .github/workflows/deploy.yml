@@ -28,7 +28,7 @@ jobs:
       - run: npm ci --no-audit --no-fund
       - run: npm run validate-data
       - run: npm run typecheck
-      # - run: npm run lint  # ESLint 9.x 需迁移至 eslint.config.js，暂跳过
+      - run: npm run lint
       - run: npm run build
         env:
           GITHUB_PAGES: true
@@ -54,7 +54,7 @@ jobs:
     if: ${{ always() && (github.event_name == 'workflow_dispatch' || ((github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master') && needs.build.result == 'success')) }}
     environment:
       name: cloudflare-workers
-      url: https://holiday.masonhu.xyz
+      url: https://holiday.masonhu.cc
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -62,6 +62,9 @@ jobs:
           node-version: "22"
           cache: npm
       - run: npm ci --no-audit --no-fund
+      # workflow_dispatch 手动触发时 build job 被跳过，这里必须自行校验
+      - run: npm run validate-data
+      - run: npm run typecheck
       - run: npm run build
       - name: Deploy to Cloudflare Workers
         run: npm run deploy:cloudflare
