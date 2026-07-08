@@ -23,7 +23,18 @@ export async function generateMetadata({
   const { code } = await params;
   const region = getRegion(code);
   if (!region) return {};
-  return { title: `${region.name}假期政策` };
+  const title = `${region.name}假期政策`;
+  const description = `${region.name}年休假、婚假、产假、陪产/护理假、育儿假、探亲假、病假规定，含中央法规与本地特别规定及原文出处。`;
+  return {
+    title,
+    description,
+    alternates: { canonical: `/region/${code}/` },
+    openGraph: {
+      title: `${title} · HolidayGO`,
+      description,
+      url: `/region/${code}/`,
+    },
+  };
 }
 
 export default async function RegionPage({

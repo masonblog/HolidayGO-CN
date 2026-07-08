@@ -1,6 +1,9 @@
 import Link from "next/link";
 
-export const metadata = { title: "关于" };
+export const metadata = {
+  title: "关于",
+  alternates: { canonical: "/about/" },
+};
 
 export default function AboutPage() {
   return (

@@ -1,8 +1,13 @@
+import type { Metadata } from "next";
 import { RegionGrid } from "@/components/region-grid";
 import { ChinaMap } from "@/components/china-map";
 import { listAvailableRegions, loadCentral, loadRegion } from "@/lib/data";
 import { REGIONS, REGION_BY_CODE } from "@/lib/regions";
 import mapData from "@/lib/china-map-data.json";
+
+export const metadata: Metadata = {
+  alternates: { canonical: "/" },
+};
 
 function extractNumericDays(data: { leaveTypes?: Record<string, { daysTable?: Array<{ days: number | string }> }> }, key: string): number | null {
   const leaveType = data.leaveTypes?.[key];
