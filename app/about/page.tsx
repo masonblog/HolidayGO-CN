@@ -22,7 +22,7 @@ export default function AboutPage() {
           </div>
           <div>
             <h3 className="font-medium text-foreground">列表浏览与搜索</h3>
-            <p>首页下方的列表按行政区分组，支持关键词搜索。输入省份名称（如"浙江"、"广东"）即可快速定位。</p>
+            <p>首页下方的列表按行政区分组，支持关键词搜索。输入省份名称（如“浙江”、“广东”）即可快速定位。</p>
           </div>
           <div>
             <h3 className="font-medium text-foreground">查看详情</h3>
