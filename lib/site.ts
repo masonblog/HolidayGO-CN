@@ -1,6 +1,6 @@
 // 站点 canonical 域名：Cloudflare Workers 部署（根路径，无 basePath 前缀）。
 // GitHub Pages 镜像页面的 canonical 也统一指向该域名，避免搜索引擎判定重复内容。
-export const SITE_URL = "https://holiday.masonhu.cc";
+export const SITE_URL = "https://masonhu.cc";
 
 export const SITE_NAME = "HolidayGO";
 
