@@ -120,7 +120,7 @@ export default function AboutPage() {
           <li>样式：Tailwind CSS</li>
           <li>UI 组件：Radix UI + shadcn/ui</li>
           <li>数据格式：YAML</li>
-          <li>部署：GitHub Actions → GitHub Pages</li>
+          <li>部署：GitHub Actions → Cloudflare Workers（主）+ GitHub Pages（备）</li>
         </ul>
       </section>
 
