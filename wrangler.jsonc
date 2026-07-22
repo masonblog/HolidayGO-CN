@@ -6,7 +6,7 @@
   "preview_urls": true,
   "routes": [
     {
-      "pattern": "masonhu.cc",
+      "pattern": "holiday.masonhu.cc",
       "custom_domain": true
     }
   ],
