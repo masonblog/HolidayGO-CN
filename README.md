@@ -4,12 +4,12 @@
 ![React](https://img.shields.io/badge/React-19-61DAFB?logo=react&logoColor=000)
 ![TypeScript](https://img.shields.io/badge/TypeScript-5.7-3178C6?logo=typescript&logoColor=fff)
 ![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-3.4-06B6D4?logo=tailwindcss&logoColor=fff)
-![GitHub Pages](https://img.shields.io/badge/Deploy-GitHub_Pages-222?logo=githubpages&logoColor=fff)
-![Cloudflare Workers](https://img.shields.io/badge/Backup-Cloudflare_Workers-F38020?logo=cloudflare&logoColor=fff)
+![Cloudflare Workers](https://img.shields.io/badge/Deploy-Cloudflare_Workers-F38020?logo=cloudflare&logoColor=fff)
+![GitHub Pages](https://img.shields.io/badge/Backup-GitHub_Pages-222?logo=githubpages&logoColor=fff)
 
 本工具帮助你在几十秒内查清自己所在省份的七类法定假期权益：年休假、婚假、产假、陪产/护理假、育儿假、探亲假、病假。国家层面的统一规定与各省（自治区、直辖市）的特殊规定自动合并展示，让你不用翻遍法规文件，也能快速获得准确、可溯源的假期信息。
 
-[开始使用](https://masonblog.github.io/HolidayGO-CN) | [备用地址](https://holiday.masonhu.cc)
+[开始使用](https://masonhu.cc) | [备用地址](https://masonblog.github.io/HolidayGO-CN)
 
 ---
 
