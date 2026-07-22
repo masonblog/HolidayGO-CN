@@ -44,7 +44,7 @@ data/
 
 ## Cloudflare Workers 主部署
 
-项目使用 Cloudflare Workers 静态资产作为主部署：[https://masonhu.cc](https://masonhu.cc)，并保留 GitHub Pages 作为备用地址。Workers 构建不设置 `GITHUB_PAGES=true`，因此不会带 `/HolidayGO-CN` 路径前缀，适合部署到该自定义域名根路径。
+项目使用 Cloudflare Workers 静态资产作为主部署：[https://holiday.masonhu.cc](https://holiday.masonhu.cc)，并保留 GitHub Pages 作为备用地址。Workers 构建不设置 `GITHUB_PAGES=true`，因此不会带 `/HolidayGO-CN` 路径前缀，适合部署到该自定义域名根路径。
 
 本地部署前先完成 Cloudflare 登录，然后运行：
 
