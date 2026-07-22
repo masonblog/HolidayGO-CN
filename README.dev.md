@@ -8,7 +8,7 @@
 - Tailwind CSS + shadcn/ui 风格组件 + Radix UI primitives
 - next-themes（深 / 浅 / 跟随系统三态切换）
 - 数据：YAML 文件，仓库版本化，构建时由 zod 校验
-- 部署：GitHub Pages（主）+ Cloudflare Workers（备份），`output: 'export'` 全静态产物
+- 部署：Cloudflare Workers（主）+ GitHub Pages（备份），`output: 'export'` 全静态产物
 
 ## 本地开发
 
@@ -42,9 +42,9 @@ data/
 4. `lastVerified` 填核对当日 ISO 日期（YYYY-MM-DD）。
 5. 本地跑 `npm run validate-data` 与 `npm run build`，提交 PR。
 
-## Cloudflare Workers 备份部署
+## Cloudflare Workers 主部署
 
-项目保留 GitHub Pages 作为主部署，同时提供 Cloudflare Workers 静态资产备份部署：[https://holiday.masonhu.cc](https://holiday.masonhu.cc)。Workers 构建不设置 `GITHUB_PAGES=true`，因此不会带 `/HolidayGO-CN` 路径前缀，适合部署到该自定义域名根路径。
+项目使用 Cloudflare Workers 静态资产作为主部署：[https://holiday.masonhu.cc](https://holiday.masonhu.cc)，并保留 GitHub Pages 作为备用地址。Workers 构建不设置 `GITHUB_PAGES=true`，因此不会带 `/HolidayGO-CN` 路径前缀，适合部署到该自定义域名根路径。
 
 本地部署前先完成 Cloudflare 登录，然后运行：
 
@@ -53,7 +53,7 @@ npm run build
 npm run deploy:cloudflare
 ```
 
-GitHub Actions 中的部署 workflow 为 `.github/workflows/deploy.yml`（GitHub Pages 与 Cloudflare Workers 在同一 workflow 内）。仓库需要配置以下 Secrets：
+GitHub Actions 中的部署 workflow 为 `.github/workflows/deploy.yml`（Cloudflare Workers 主部署与 GitHub Pages 备用部署在同一 workflow 内）。Cloudflare 部署使用 Wrangler 静态资产清单进行增量上传，仅推送变更文件以提升部署速度。仓库需要配置以下 Secrets:
 
 - `CLOUDFLARE_API_TOKEN`
 - `CLOUDFLARE_ACCOUNT_ID`
