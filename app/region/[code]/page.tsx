@@ -8,7 +8,6 @@ import { LEAVE_LABELS } from "@/lib/schema";
 import { LeaveCard } from "@/components/leave-card";
 import { ProvinceOverview } from "@/components/province-overview";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { normalizeChineseBlogTitle } from "@/lib/site";
 
 export const dynamicParams = false;
 
@@ -24,7 +23,7 @@ export async function generateMetadata({
   const { code } = await params;
   const region = getRegion(code);
   if (!region) return {};
-  const title = normalizeChineseBlogTitle(`${region.name}假期政策`);
+  const title = `${region.name}假期政策`;
   const description = `${region.name}年休假、婚假、产假、陪产/护理假、育儿假、探亲假、病假规定，含中央法规与本地特别规定及原文出处。`;
   return {
     title,

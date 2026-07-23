@@ -8,7 +8,3 @@ export const SITE_TITLE = "HolidayGO · 中国假期政策查询";
 
 export const SITE_DESCRIPTION =
   "面向中国大陆居民的假期政策查询：年休、婚、产、陪产、育儿、探亲、病假，覆盖中央法规与省级特别规定。";
-
-export function normalizeChineseBlogTitle(title: string) {
-  return title.replace(/议正言辞(?=\d)/g, "议正言辞 ");
-}
