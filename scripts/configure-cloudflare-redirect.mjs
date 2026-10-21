@@ -34,7 +34,15 @@ async function api(path, method = "GET", body, allowNotFound = false) {
     body: body === undefined ? undefined : JSON.stringify(body),
     signal: AbortSignal.timeout(30_000),
   });
-  const data = await response.json();
+  if (response.status === 204 && response.ok) return null;
+  const text = await response.text();
+  if (!text && response.ok && method === "DELETE") return null;
+  let data;
+  try {
+    data = JSON.parse(text);
+  } catch {
+    throw new Error(`Cloudflare ${method} ${path} returned an invalid response (HTTP ${response.status}).`);
+  }
   if (allowNotFound && response.status === 404) return null;
   if (!response.ok || !data.success) {
     const errors = (data.errors ?? [])
