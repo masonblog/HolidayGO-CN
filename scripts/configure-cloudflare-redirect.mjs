@@ -106,23 +106,31 @@ if (
 }
 console.log("Verified enabled rule: holiday.masonhu.cc → https://holiday.masonhu.org, 308, path and query preserved.");
 
-for (const scheme of ["http", "https"]) {
-  const url = `${scheme}://holiday.masonhu.cc/about?from=old`;
-  let verified = false;
-  for (let attempt = 1; attempt <= 12; attempt++) {
-    const response = await fetch(url, { redirect: "manual", signal: AbortSignal.timeout(15_000) });
-    const location = response.headers.get("location");
-    await response.body?.cancel();
-    if (response.status === 308 && location === "https://holiday.masonhu.org/about?from=old") {
-      verified = true;
-      break;
+async function verifyRedirects() {
+  for (const scheme of ["http", "https"]) {
+    const url = `${scheme}://holiday.masonhu.cc/about?from=old`;
+    let verified = false;
+    for (let attempt = 1; attempt <= 18; attempt++) {
+      try {
+        const response = await fetch(url, { redirect: "manual", signal: AbortSignal.timeout(10_000) });
+        const location = response.headers.get("location");
+        await response.body?.cancel();
+        if (response.status === 308 && location === "https://holiday.masonhu.org/about?from=old") {
+          verified = true;
+          break;
+        }
+        console.log(`Waiting for redirect propagation (${scheme}, attempt ${attempt}, HTTP ${response.status}).`);
+      } catch {
+        console.log(`Waiting for DNS propagation (${scheme}, attempt ${attempt}).`);
+      }
+      if (attempt < 18) await new Promise((resolve) => setTimeout(resolve, 5_000));
     }
-    console.log(`Waiting for redirect propagation (${scheme}, attempt ${attempt}, HTTP ${response.status}).`);
-    if (attempt < 12) await new Promise((resolve) => setTimeout(resolve, 5_000));
+    if (!verified) throw new Error(`Public redirect check failed for ${url}.`);
+    console.log(`Verified ${url}: HTTP 308 with expected Location.`);
   }
-  if (!verified) throw new Error(`Public redirect check failed for ${url}. Worker bindings have not been removed.`);
-  console.log(`Verified ${url}: HTTP 308 with expected Location.`);
 }
+
+if (process.env.DETACH_LEGACY_WORKER !== "true") await verifyRedirects();
 
 if (process.env.DETACH_LEGACY_WORKER === "true") {
   if (!accountId) throw new Error("CLOUDFLARE_ACCOUNT_ID is required to detach the old Worker domain.");
@@ -136,6 +144,7 @@ if (process.env.DETACH_LEGACY_WORKER === "true") {
   // Check DNS read access before detaching. Restore the domain if DNS setup fails.
   await listDns();
   const previous = domains[0];
+  if (previous) await verifyRedirects();
   let detached = false;
   let createdDnsId;
   let changedDns;
@@ -168,16 +177,7 @@ if (process.env.DETACH_LEGACY_WORKER === "true") {
     if ((await api(`${domainPath}?hostname=holiday.masonhu.cc`)).length) {
       throw new Error("The old Worker domain is still attached.");
     }
-    for (const scheme of ["http", "https"]) {
-      const response = await fetch(`${scheme}://holiday.masonhu.cc/about?from=old`, {
-        redirect: "manual",
-        signal: AbortSignal.timeout(15_000),
-      });
-      await response.body?.cancel();
-      if (response.status !== 308 || response.headers.get("location") !== "https://holiday.masonhu.org/about?from=old") {
-        throw new Error("Redirect verification failed after detaching the old Worker domain.");
-      }
-    }
+    await verifyRedirects();
     console.log("Verified independent Single Redirect: proxied DNS exists, old Worker binding is absent, HTTP and HTTPS return 308.");
   } catch (error) {
     if (detached) {
