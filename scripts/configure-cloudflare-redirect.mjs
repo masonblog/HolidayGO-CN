@@ -43,7 +43,7 @@ async function api(path, method = "GET", body, allowNotFound = false) {
       .replaceAll(token, "[REDACTED]");
     throw new Error(
       `Cloudflare ${method} ${path} failed (HTTP ${response.status}): ${errors}. ` +
-      "This operation needs Zone Read and Single Redirect Edit (Dynamic URL Redirects Write) for masonhu.cc. No Worker binding has been removed."
+      "Rules need Zone Read and Single Redirect Edit; DNS changes need DNS Edit; Worker domain changes need Workers Scripts Edit."
     );
   }
   return data.result;
@@ -114,4 +114,75 @@ for (const scheme of ["http", "https"]) {
   }
   if (!verified) throw new Error(`Public redirect check failed for ${url}. Worker bindings have not been removed.`);
   console.log(`Verified ${url}: HTTP 308 with expected Location.`);
+}
+
+if (process.env.DETACH_LEGACY_WORKER === "true") {
+  if (!accountId) throw new Error("CLOUDFLARE_ACCOUNT_ID is required to detach the old Worker domain.");
+  const domainPath = `/accounts/${accountId}/workers/domains`;
+  const dnsPath = `/zones/${zoneId}/dns_records`;
+  const listDns = () => api(`${dnsPath}?name=holiday.masonhu.cc`);
+  const domains = await api(`${domainPath}?hostname=holiday.masonhu.cc`);
+  if (domains.length > 1 || domains.some((domain) => domain.service !== "holidaygo-cn" || domain.zone_id !== zoneId)) {
+    throw new Error("Unexpected Worker bindings for the old hostname; no binding was changed.");
+  }
+  // Check DNS read access before detaching. Restore the domain if DNS setup fails.
+  await listDns();
+  const previous = domains[0];
+  let detached = false;
+  let createdDnsId;
+  let changedDns;
+  try {
+    if (previous) {
+      await api(`${domainPath}/${previous.id}`, "DELETE");
+      detached = true;
+      console.log("Detached holiday.masonhu.cc from holidaygo-cn.");
+    }
+    const records = (await listDns()).filter((record) => ["A", "AAAA", "CNAME"].includes(record.type));
+    if (!records.some((record) => record.proxied)) {
+      if (records.length) {
+        await api(`${dnsPath}/${records[0].id}`, "PATCH", { proxied: true });
+        changedDns = { id: records[0].id, proxied: records[0].proxied };
+      } else {
+        const created = await api(dnsPath, "POST", {
+          type: "A",
+          name: "holiday.masonhu.cc",
+          content: "192.0.2.1",
+          ttl: 1,
+          proxied: true,
+          comment: "HolidayGO Single Redirect; no origin server required",
+        });
+        createdDnsId = created.id;
+      }
+    }
+    if (!(await listDns()).some((record) => ["A", "AAAA", "CNAME"].includes(record.type) && record.proxied)) {
+      throw new Error("No proxied DNS record exists after detaching the old Worker domain.");
+    }
+    if ((await api(`${domainPath}?hostname=holiday.masonhu.cc`)).length) {
+      throw new Error("The old Worker domain is still attached.");
+    }
+    for (const scheme of ["http", "https"]) {
+      const response = await fetch(`${scheme}://holiday.masonhu.cc/about?from=old`, {
+        redirect: "manual",
+        signal: AbortSignal.timeout(15_000),
+      });
+      await response.body?.cancel();
+      if (response.status !== 308 || response.headers.get("location") !== "https://holiday.masonhu.org/about?from=old") {
+        throw new Error("Redirect verification failed after detaching the old Worker domain.");
+      }
+    }
+    console.log("Verified independent Single Redirect: proxied DNS exists, old Worker binding is absent, HTTP and HTTPS return 308.");
+  } catch (error) {
+    if (detached) {
+      if (createdDnsId) await api(`${dnsPath}/${createdDnsId}`, "DELETE");
+      if (changedDns) await api(`${dnsPath}/${changedDns.id}`, "PATCH", { proxied: changedDns.proxied });
+      await api(domainPath, "PUT", {
+        hostname: previous.hostname,
+        service: previous.service,
+        environment: previous.environment,
+        zone_id: previous.zone_id,
+      });
+      console.log("Restored the old Worker domain after DNS or redirect verification failed.");
+    }
+    throw error;
+  }
 }
