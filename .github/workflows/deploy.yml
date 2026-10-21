@@ -5,6 +5,11 @@ on:
     branches: [main, master]
   pull_request:
   workflow_dispatch:
+    inputs:
+      configure_redirect_only:
+        description: "Only configure and verify the Cloudflare legacy domain redirect"
+        type: boolean
+        default: false
 
 permissions:
   contents: read
@@ -16,7 +21,24 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
+  configure-redirect:
+    if: github.event_name == 'workflow_dispatch' && inputs.configure_redirect_only
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    environment: cloudflare-workers
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Configure and verify the legacy domain redirect
+        run: node scripts/configure-cloudflare-redirect.mjs
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+
   checks:
+    if: github.event_name != 'workflow_dispatch' || !inputs.configure_redirect_only
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
