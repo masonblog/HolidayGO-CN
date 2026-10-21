@@ -1,10 +1,15 @@
 {
   "$schema": "./node_modules/wrangler/config-schema.json",
   "name": "holidaygo-cn",
+  "main": "cloudflare/worker.ts",
   "compatibility_date": "2026-05-15",
   "workers_dev": true,
   "preview_urls": true,
   "routes": [
+    {
+      "pattern": "holiday.masonhu.org",
+      "custom_domain": true
+    },
     {
       "pattern": "holiday.masonhu.cc",
       "custom_domain": true
@@ -16,6 +21,8 @@
   },
   "assets": {
     "directory": "./out",
+    "binding": "ASSETS",
+    "run_worker_first": true,
     "not_found_handling": "404-page"
   }
 }

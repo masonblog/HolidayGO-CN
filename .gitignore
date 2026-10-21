@@ -10,6 +10,7 @@ next-env.d.ts.bak
 
 # production
 build/
+.wrangler/
 
 # misc
 .DS_Store
