@@ -100,10 +100,18 @@ console.log("Verified enabled rule: holiday.masonhu.cc → https://holiday.mason
 
 for (const scheme of ["http", "https"]) {
   const url = `${scheme}://holiday.masonhu.cc/about?from=old`;
-  const response = await fetch(url, { redirect: "manual", signal: AbortSignal.timeout(30_000) });
-  if (response.status !== 308 || response.headers.get("location") !== "https://holiday.masonhu.org/about?from=old") {
-    throw new Error(`Public redirect check failed for ${url}: HTTP ${response.status}. Worker bindings have not been removed.`);
+  let verified = false;
+  for (let attempt = 1; attempt <= 12; attempt++) {
+    const response = await fetch(url, { redirect: "manual", signal: AbortSignal.timeout(15_000) });
+    const location = response.headers.get("location");
+    await response.body?.cancel();
+    if (response.status === 308 && location === "https://holiday.masonhu.org/about?from=old") {
+      verified = true;
+      break;
+    }
+    console.log(`Waiting for redirect propagation (${scheme}, attempt ${attempt}, HTTP ${response.status}).`);
+    if (attempt < 12) await new Promise((resolve) => setTimeout(resolve, 5_000));
   }
-  await response.body?.cancel();
+  if (!verified) throw new Error(`Public redirect check failed for ${url}. Worker bindings have not been removed.`);
   console.log(`Verified ${url}: HTTP 308 with expected Location.`);
 }
